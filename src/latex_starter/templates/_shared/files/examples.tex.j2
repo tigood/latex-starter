@@ -1,0 +1,24 @@
+{% if figures_tables_examples %}
+\begin{figure}[htbp]
+\centering
+\fbox{\rule{0pt}{22mm}\rule{0.6\linewidth}{0pt}}
+\caption{{% if chinese %}图片占位示例{% else %}Image placeholder{% endif %}}
+\end{figure}
+\begin{table}[htbp]
+\centering
+\caption{{% if chinese %}表格示例{% else %}Example table{% endif %}}
+\begin{tabular}{lr}
+\hline
+Item & Value \\
+\hline
+A & 1 \\
+B & 2 \\
+\hline
+\end{tabular}
+\end{table}
+{% endif %}{% if code_listing_example %}
+\begin{lstlisting}[language=Python,caption={Python example}]
+def square(x):
+    return x * x
+\end{lstlisting}
+{% endif %}

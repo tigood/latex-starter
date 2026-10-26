@@ -1,0 +1,13 @@
+{
+  "latex-workshop.latex.outDir": "%DIR%/build",
+  "latex-workshop.latex.autoBuild.run": "never",
+  "latex-workshop.latex.autoClean.run": "never",
+  "latex-workshop.latex.recipe.default": "first",
+  "latex-workshop.latex.recipes": [
+    {"name": "latex-starter (XeLaTeX)", "tools": ["latex-starter-latexmk"]}
+  ],
+  "latex-workshop.latex.tools": [
+    {"name": "latex-starter-latexmk", "command": "latexmk", "args": << workshop_args | json >>}
+  ],
+  "latex-workshop.synctex.afterBuild.enabled": true
+}

@@ -1,0 +1,36 @@
+[
+  {
+    "source": "files/latexmkrc.j2",
+    "target": ".latexmkrc"
+  },
+  {
+    "source": "files/gitignore.j2",
+    "target": ".gitignore"
+  },
+  {
+    "source": "files/README.md.j2",
+    "target": "README.md"
+  },
+  {
+    "source": "files/settings.json.j2",
+    "target": ".vscode/settings.json"
+  },
+  {
+    "source": "files/extensions.json",
+    "target": ".vscode/extensions.json"
+  },
+  {
+    "source": "files/references.bib",
+    "target": "references/references.bib",
+    "when": {
+      "bibliography": true
+    }
+  },
+  {
+    "source": "files/figures.gitkeep",
+    "target": "figures/.gitkeep",
+    "when": {
+      "figures_tables_examples": true
+    }
+  }
+]

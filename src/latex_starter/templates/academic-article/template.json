@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "id": "academic-article",
+  "name": "通用学术论文",
+  "description": "普通学术论文和文献阅读",
+  "supported_languages": [
+    "zh",
+    "en",
+    "mixed"
+  ],
+  "supported_structures": [
+    "single",
+    "split"
+  ],
+  "default_language": "zh",
+  "default_structure": "split",
+  "default_engine": "xelatex",
+  "features": {
+    "bibliography": true,
+    "figures_tables_examples": true,
+    "code_listing_example": true,
+    "table_of_contents": true,
+    "appendix": true
+  },
+  "defaults": {
+    "bibliography": true,
+    "figures_tables_examples": true,
+    "code_listing_example": false,
+    "table_of_contents": false,
+    "appendix": false
+  },
+  "files": [
+    {
+      "source": "files/main.tex.j2",
+      "target": "main.tex"
+    },
+    {
+      "source": "files/sections/01_introduction.tex.j2",
+      "target": "sections/01_introduction.tex",
+      "when": {
+        "structure": "split"
+      }
+    },
+    {
+      "source": "files/sections/02_method.tex.j2",
+      "target": "sections/02_method.tex",
+      "when": {
+        "structure": "split"
+      }
+    },
+    {
+      "source": "files/sections/03_conclusion.tex.j2",
+      "target": "sections/03_conclusion.tex",
+      "when": {
+        "structure": "split"
+      }
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+name: tests
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  unit:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        python: ['3.10', '3.11', '3.12', '3.13', '3.14']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install -e ".[dev]"
+      - run: python -m pytest -q -m "not integration and not distribution"
+      - run: python -m pip wheel . --no-deps -w dist
+  distribution:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: python -m pip install -e ".[dev,distribution]"
+      - run: python -m pip download --only-binary=:all: --dest "$RUNNER_TEMP/wheelhouse" pip setuptools wheel Jinja2
+      - run: python scripts/build_standalone.py
+      - run: python -m pytest -q -m distribution
+        env:
+          LATEX_STARTER_DISTRIBUTION: '1'
+          LATEX_STARTER_WHEELHOUSE: ${{ runner.temp }}/wheelhouse
+          LATEX_STARTER_EXECUTABLE: ${{ github.workspace }}/dist/experimental/linux-x86_64/latex-starter

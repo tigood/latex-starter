@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "latex-starter"
+version = "0.1.0"
+description = "Create reproducible local XeLaTeX projects with safe, declarative templates"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+dependencies = ["Jinja2>=3.0,<4"]
+keywords = ["latex", "xelatex", "templates", "cli"]
+classifiers = [
+  "Environment :: Console",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Text Processing :: Markup :: LaTeX",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=6.2"]
+# Optional developer tools; none are installed with the application itself.
+distribution = ["build>=1.2", "pipx>=1.5", "PyInstaller>=6.0,<7"]
+
+[project.scripts]
+latex-starter = "latex_starter.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+latex_starter = ["templates/*/*.json", "templates/*/files/*", "templates/*/files/**/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+  "integration: real TeX compilation, opt in with LATEX_STARTER_INTEGRATION=1",
+  "distribution: clean installation tests, opt in with LATEX_STARTER_DISTRIBUTION=1",
+]

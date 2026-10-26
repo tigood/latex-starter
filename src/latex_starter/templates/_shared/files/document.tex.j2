@@ -1,0 +1,49 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}
+{% if chinese %}\usepackage{xeCJK}
+\IfFontExistsTF{Noto Serif CJK SC}{
+  \setCJKmainfont{Noto Serif CJK SC}
+}{
+  \setCJKmainfont{FandolSong-Regular.otf}[BoldFont=FandolSong-Bold.otf,ItalicFont=FandolKai-Regular.otf]
+}
+\IfFontExistsTF{Noto Sans CJK SC}{
+  \setCJKsansfont{Noto Sans CJK SC}
+}{
+  \setCJKsansfont{FandolHei-Regular.otf}[BoldFont=FandolHei-Bold.otf]
+}
+\IfFontExistsTF{Noto Sans Mono CJK SC}{
+  \setCJKmonofont{Noto Sans Mono CJK SC}
+}{
+  \setCJKmonofont{FandolFang-Regular.otf}
+}
+{% endif %}\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath}
+{% if figures_tables_examples %}\usepackage{graphicx}
+{% endif %}{% if code_listing_example %}\usepackage{listings}
+\lstset{basicstyle=\ttfamily\small,frame=single,breaklines=true}
+{% endif %}{% if bibliography %}\usepackage[backend=biber,style=authoryear]{biblatex}
+\addbibresource{references/references.bib}
+{% endif %}\usepackage[unicode,hidelinks]{hyperref}
+\title{<< title | tex >>}
+\author{<< author | tex >>{% if institution %}{% if author %}\\{% endif %}<< institution | tex >>{% endif %}}
+\date{}
+\begin{document}
+{% if kind == 'report' %}\begin{titlepage}
+\maketitle
+\thispagestyle{empty}
+\vfill
+\begin{center}{% if chinese %}课程与技术报告{% else %}Course and Technical Report{% endif %}\end{center}
+\end{titlepage}
+{% else %}\maketitle
+{% endif %}{% if kind == 'article' %}\begin{abstract}
+{% if chinese %}这是可替换的摘要。请简要说明研究问题、方法和结论。{% else %}Replace this short abstract with your question, method and findings.{% endif %}
+\end{abstract}
+{% endif %}{% if table_of_contents %}\tableofcontents
+\bigskip
+{% endif %}{% for section in ['01_introduction', '02_method', '03_conclusion'] %}{% if structure == 'split' %}\input{sections/<< section >>}
+{% else %}{% include template ~ '/files/sections/' ~ section ~ '.tex.j2' %}
+{% endif %}{% endfor %}{% if appendix %}\appendix
+\section{{% if chinese %}补充材料{% else %}Supplementary material{% endif %}}
+{% if chinese %}在这里添加可选的推导或补充说明。{% else %}Add optional derivations or supporting notes here.{% endif %}
+{% endif %}{% if bibliography %}\printbibliography
+{% endif %}\end{document}

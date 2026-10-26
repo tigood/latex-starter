@@ -1,0 +1,42 @@
+# Generated LaTeX project
+
+Created with LaTeX Starter << version >> using << template >>.
+Language: << language >>. Structure: << structure >>. Engine: XeLaTeX.
+
+## Build
+
+Run from this project's root directory:
+
+~~~sh
+<< build_command >>
+~~~
+
+Required: XeLaTeX, latexmk and the TeX packages used in main.tex.
+{% if bibliography %}Bibliography is enabled: install biblatex and Biber. Latexmk runs Biber automatically.
+{% endif %}{% if chinese %}Chinese fonts: Noto Serif/Sans/Sans Mono CJK SC; the source falls back to Fandol fonts from TeX Live.
+{% endif %}No dependencies are installed automatically. Diagnose with:
+
+~~~sh
+latex-starter doctor --language << language >>{% if bibliography %} --bibliography{% endif %}
+~~~
+
+The PDF and auxiliary files appear in build/, which Git ignores.
+In VS Code install the recommended LaTeX Workshop extension and use the
+latex-starter (XeLaTeX) recipe. It uses the same flags and project .latexmkrc.
+Global latexmk initialization files are skipped with -norc for consistent builds.
+Compilation errors leave your source and build logs available for inspection.
+
+## Edit
+
+{% if structure == 'split' %}Edit sections/*.tex. Add another section file and reference it with
+\input{sections/04_new_section} in main.tex.
+{% else %}Edit main.tex directly. Add sections with \section{Heading}.
+{% endif %}
+For an image, put the file in figures/ (create it if absent), load graphicx,
+and use \includegraphics[width=0.6\linewidth]{figures/example.png}.
+The optional figure example is a drawn placeholder and needs no image download.
+{% if bibliography %}Add records to references/references.bib and cite with \autocite{knuth1984}.
+Do not include local attachment paths in shared bibliography files.
+{% else %}Bibliography is disabled. To enable it later, load biblatex with backend=biber,
+add a relative .bib resource and a \printbibliography command.
+{% endif %}Optional examples are safe to delete. Metadata is in .latex-starter.json.
